@@ -23,7 +23,7 @@ clone_repositories () {
     do
         if [ ! -d "../code/$i" ] ; then
             pwd
-            # git clone "$i" "../code/$i"
+            git clone "$i" "../code/$i"
         fi
         
     done
