@@ -9,10 +9,9 @@ ARCHIVE=cointelegraph-$DAY.sql.gz
 DUMP=cointelegraph-$DAY.sql
 
 repositories=(
-    # needs duke and node-graph added
     git@github.com:smart-kids/graph.git
     git@github.com:smart-kids/admin.git
-    git@github.com:smart-kids/parent-and-bus-agent-app.git
+    # git@github.com:smart-kids/parent-and-bus-agent-app.git
 )
 
 clone_repositories () {
