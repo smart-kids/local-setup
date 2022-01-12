@@ -22,7 +22,7 @@ services:
   #     - ./init:/docker-entrypoint-initdb.d
   admin:
     container_name: admin
-    build: ../admin
+    build: ../code/admin
     working_dir: /var/www
     ports:
       - 3000:3000
@@ -33,7 +33,7 @@ services:
       - NODE_ENV=development
   graph:
     container_name: graph
-    build: ../graph
+    build: ../code/graph
     command:
       - /bin/bash
       - -c

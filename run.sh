@@ -7,6 +7,7 @@ set -xe
 DAY=`date +%u`
 ARCHIVE=cointelegraph-$DAY.sql.gz
 DUMP=cointelegraph-$DAY.sql
+SRC_DIR='./'
 
 repositories=(
     git@github.com:smart-kids/graph.git
@@ -18,11 +19,11 @@ clone_repositories () {
     echo "Cloning necessary repositories..."
 
     mkdir -p ../code
+    cd ../code
     for i in "${repositories[@]}"
     do
-        if [ ! -d "../code/$i" ] ; then
-            pwd
-            git clone "$i" "../code/$i"
+        if [ ! -d "$i" ] ; then
+            git clone "$i"
         fi
         
     done
