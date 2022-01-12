@@ -1,0 +1,49 @@
+version: '3'
+services:
+  # redis:
+  #   image: "redis:alpine"
+  #   # command: redis-server --requirepass cointelegraph
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - ./storage/redis:/data:rw
+  #   environment:
+  #     - REDIS_REPLICATION_MODE=master
+  # cointelegraph_db:
+  #   image: mysql
+  #   restart: always
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  #     MYSQL_DATABASE: cointelegraph
+  #     MYSQL_ROOT_PASSWORD: cointelegraph
+  #   volumes:
+  #     - ./init:/docker-entrypoint-initdb.d
+  admin:
+    container_name: admin
+    build: ../admin
+    working_dir: /var/www
+    ports:
+      - 3000:3000
+    volumes:
+      - ../admin:/var/www:rw
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
+      - NODE_ENV=development
+  graph:
+    container_name: graph
+    build: ../graph
+    command:
+      - /bin/bash
+      - -c
+      - |
+        yarn test
+        yarn dev
+    ports:
+      - 4000:4000
+    volumes:
+      - ../graph:/var/www:rw
+    environment:
+      - REDIS_HOST=redis
+      - NODE_ENV=development
